@@ -5,21 +5,35 @@
   "private": true,
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "solidity",
     "hardhat",
     "vault",
-    "botchain"
+    "botchain",
+    "react",
+    "viem"
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.2.0",
+    "lucide-react": "^1.16.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "viem": "^2.23.5"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "hardhat": "^2.22.18"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.2.0"
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "hardhat": "^2.22.18",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
   }
 }
