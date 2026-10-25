@@ -8,3 +8,5 @@ coverage/
 coverage.json
 dist/
 .DS_Store
+.vercel/
+
