@@ -8,6 +8,7 @@ import { RecipientManagement } from './components/RecipientManagement'
 import { LimitsConfiguration } from './components/LimitsConfiguration'
 import { ActivityFeed } from './components/ActivityFeed'
 import { StatusModal } from './components/StatusModal'
+import { Footer } from './components/Footer'
 import { useWallet } from './hooks/useWallet'
 import { useVault } from './hooks/useVault'
 import './App.css'
@@ -91,6 +92,9 @@ export const App: React.FC = () => {
         error={vault.txError}
         onClose={vault.resetTxStatus}
       />
+
+      {/* Footer Navigation */}
+      <Footer />
     </div>
   )
 }
