@@ -1,5 +1,5 @@
 import React from 'react'
-import { Activity, ArrowDownRight, ArrowUpRight, UserPlus, UserMinus, Sliders, ExternalLink } from 'lucide-react'
+import { Activity, ArrowDownRight, ArrowUpRight, UserPlus, UserMinus, Sliders, ExternalLink, KeyRound } from 'lucide-react'
 import { botChainTestnet } from '../config/chain'
 import type { VaultActivityItem } from '../hooks/useVault'
 
@@ -21,6 +21,8 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({ activity, isLoading 
         return <UserMinus size={16} className="text-rose" />
       case 'LimitsUpdated':
         return <Sliders size={16} className="text-blue" />
+      case 'OwnershipTransferred':
+        return <KeyRound size={16} className="text-amber" />
       default:
         return <Activity size={16} className="text-muted" />
     }

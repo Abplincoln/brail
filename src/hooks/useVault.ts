@@ -6,7 +6,7 @@ import {
   type Address,
   type WalletClient,
 } from 'viem'
-import { publicClient, botChainTestnet, getEffectiveVaultAddress } from '../config/chain'
+import { publicClient, botChainTestnet, getEffectiveVaultAddress, VAULT_DEPLOYMENT_BLOCK } from '../config/chain'
 import { brailVaultAbi } from '../contracts/brailVaultAbi'
 
 export interface VaultState {
@@ -37,7 +37,7 @@ export interface VaultState {
 }
 
 export interface VaultActivityItem {
-  type: 'Deposit' | 'Withdrawal' | 'RecipientAdded' | 'RecipientRemoved' | 'LimitsUpdated'
+  type: 'Deposit' | 'Withdrawal' | 'RecipientAdded' | 'RecipientRemoved' | 'LimitsUpdated' | 'OwnershipTransferred'
   title: string
   details: string
   txHash: string
@@ -166,11 +166,10 @@ export function useVault(walletAddress: Address | null, walletClient: WalletClie
       setAvailableDailyAllowance(formatEther(allowanceRes))
       setApprovedRecipients([...recipientsRes] as Address[])
 
-      // Query recent confirmed events from chain
+      // Query confirmed events from chain starting from deployment block
       try {
         const latestBlock = await publicClient.getBlockNumber()
-        // Query recent 2000 blocks to avoid RPC limit
-        const fromBlock = latestBlock > 2000n ? latestBlock - 2000n : 0n
+        const fromBlock = latestBlock > VAULT_DEPLOYMENT_BLOCK ? VAULT_DEPLOYMENT_BLOCK : 0n
 
         const events = await publicClient.getContractEvents({
           address: effectiveAddress,
@@ -201,8 +200,12 @@ export function useVault(walletAddress: Address | null, walletClient: WalletClie
             details = `Revoked: ${args.recipient}`
           } else if (ev.eventName === 'LimitsUpdated') {
             const args = ev.args as any
-            title = 'Limits Reconfigured'
+            title = 'Limits Configured'
             details = `Max: ${formatEther(args.maxPerWithdrawal || 0n)} BOT | Daily: ${formatEther(args.dailyLimit || 0n)} BOT`
+          } else if (ev.eventName === 'OwnershipTransferred') {
+            const args = ev.args as any
+            title = 'Ownership Established'
+            details = `Owner set to ${args.newOwner}`
           }
 
           return {

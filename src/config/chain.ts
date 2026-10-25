@@ -32,8 +32,11 @@ export const publicClient = createPublicClient({
 // Environment or configured contract address
 export const ENV_VAULT_ADDRESS = (import.meta.env.VITE_VAULT_ADDRESS || '').trim()
 
+// Known deployment block of the BrailVault contract on Bohr Testnet
+export const VAULT_DEPLOYMENT_BLOCK = 27943000n
+
 export function getEffectiveVaultAddress(customAddress?: string): Address | null {
-  const addr = (customAddress !== undefined ? customAddress : ENV_VAULT_ADDRESS).trim()
+  const addr = (customAddress && customAddress.trim()) ? customAddress.trim() : ENV_VAULT_ADDRESS
   if (addr && isAddress(addr)) {
     return addr as Address
   }

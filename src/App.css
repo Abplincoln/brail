@@ -172,6 +172,66 @@
   margin-bottom: 28px;
 }
 
+.deployment-banner-card.connected {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(18, 24, 38, 0.9) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 16px 22px;
+}
+
+.deployment-connected-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.connected-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.connected-status-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent-emerald);
+}
+
+.connected-address-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.connected-address-link {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-tiny-settings {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-tiny-settings:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
 .deployment-banner-header {
   display: flex;
   gap: 16px;
